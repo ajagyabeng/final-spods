@@ -130,7 +130,7 @@ db.session.add_all([
 ]
 )
 
-db.session.commit()
+# db.session.commit()
 
 
 def format_result(result):
