@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spods 10™ - {{ episode.title }}</title>
+  <link rel="icon" type="image/x-icon" href="/static/img/favicon.svg">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link rel="stylesheet" href="/static/css/main.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-content">
+    <section class="brand-section scrollbar">
+      <div class="p-4">
+        <img id="brand-logo" class="my-3 ms-3" src="/static/img/about/logo.svg" alt="podcast logo" width="315px"
+          height="315px">
+        <div id="about-description">
+          <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
+          <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
+          </p>
+          <div class="brand-links">
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/connect.svg" alt=""></a>
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/wifi-sign.svg" alt=""></a>
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/heart.svg" alt=""></a>
+          </div>
+          <div class="about-text">
+            <p class="text-size-md">About podcast</p>
+            <p class="grey-body-text">In this 10mins program, James digs deep to learn the truth about guests who have
+              been
+              painted as monsters by a culture
+              that passes judgment without fully understanding the situation. Every Thursday, tune in to learn the truth
+              from another
+              misunderstood outcast as they provide the context that is missing from their terrible story. <br><br>
+              <span>Hosted by James</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="main-section p-5">
+      <!-- EPISODE -->
+      <div class="current-episode">
+        <div class="mt-4">
+          <a href="{{ url_for('home') }}" class="secondary-btn py-3"><i class="bi bi-arrow-left pe-2"></i>Back to
+            podcasts</a>
+          <h1 class="episode-title mt-5">{{ episode.title }}</h1>
+          <p class="episode-description grey-body-text">{{ episode.description }}</p>
+          <p class="green-text mb-3">{{ episode.episode }} / {{ episode.date_added }}</p>
+          <div class="spotify-episode">
+            <iframe class="mb-4 mt-3" style="border-radius:12px"
+              src="https://open.spotify.com/embed/episode/2qpVjDkUADL89xumvBGXfV?utm_source=generator&theme=0"
+              width="100%" height="152" frameBorder="0" allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+          </div>
+          <div class="paragraph-container grey-body-text">
+            <p class="paragraph">I consistently get asked two questions in these sessions - How can I decide if I should
+              quit my job and find something new? And I have worked at my job for X years, and what do I need to do to
+              get a promotion.Chances are that if you are listening to this episode, you are probably trying to figure
+              out one of those problems. While these two questions may seem worlds apart, I have found that they share
+              the same approach to getting you the answers or action you need. In this episode, we will go through a
+              simple process you can use to define your issues, talk about the things you will need to think about, and
+              lay out the process you can use to get your answers.
+            </p>
+            <p><strong>The goal</strong></p>
+            <p>While trying to get promoted or trying to decide if you should quit is at VERY different stages in your
+              career
+              journey, they do share the need for clarity, action, and a way to know what the way forward will be. They
+              also share
+              the fact that in both cases, you might be the problem, and you have a blindspot to that barrier.</p>
+            <p>So what we want to look at today is how to do you have a conversation that lays out your problems or
+              career goals,
+              lets your company know you are committed to the process, but also lets them know that you know your value
+              and that
+              inaction will be seen as an action you will respond to? And you have to do it all in a way that gets the
+              action you
+              want or fixes your problem but doesn't burn down your work relationship or reputation.</p>
+            <p>None of this is an easy trick to pull off. Before we get into how I have found success in these moments,
+              if you are
+              at a company that is abusive or toxic, then you can just skip this episode and know that you need to leave
+              as soon as
+              you can. There is a line between needing to work the system to stand up for your value and knowing when
+              the system is
+              so broken, abusive, or toxic that no outcome will be worth the damage it will do.</p>
+            <p><strong>Frustration blindness</strong></p>
+            <p>When you are in either of these positions, the biggest thing I have found you need, and often the hardest
+              to come by,
+              is perspective. I think this is an important approach because there has been a time in my career when I
+              was so
+              frustrated, and I was so certain I knew what leadership was thinking that I gave up and quit or almost
+              quit.</p>
+            <p>Sometimes that was 100% the right move, but twice I later realized that I was too in my head, too blinded
+              by what I
+              wanted or by what was wrong, that I would have left something great. I think this happens because after
+              you have been
+              in a job for a while, the positive normalizes, and you don't feel as positive as you used to when you
+              first started.
+              While the negatives start to stand out more and more. I refer to it as frustration blindness.</p>
+            <p>I think you have to be aware of this and that the longer you are in the role, the more your vision
+              narrows, and it is
+              a lot of work to keep a broader perspective and see the positives for what they are. Many times in my
+              coaching session
+              I point this out to and often surprise people to help them see all the good things they have that might be
+              rare
+              elsewhere. This process also hopefully helps overcome this.</p>
+          </div>
+        </div>
+        <img class="ms-5" src="{{ episode.img_url }}" alt="" width="300px" height="300px">
+      </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

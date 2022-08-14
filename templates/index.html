@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spods 10™ - 10mins with the most misunderstood designers.</title>
+  <link rel="icon" type="image/x-icon" href="/static/img/favicon.svg">
+  <!-- Bootstrap stylesheet -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <!-- private stylesheet -->
+  <link rel="stylesheet" href="/static/css/main.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Poppins:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body>
+  <div class="main-content">
+    <section class="brand-section scrollbar">
+      <div class="p-4">
+        <img id="brand-logo" class="my-3 ms-3" src="/static/img/about/logo.svg" alt="podcast logo" width="315px"
+          height="315px">
+        <div id="about-description">
+          <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
+          <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
+          </p>
+          <div class="brand-links">
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/connect.svg" alt=""></a>
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/wifi-sign.svg" alt=""></a>
+            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/heart.svg" alt=""></a>
+          </div>
+          <div class="about-text">
+            <p class="text-size-md">About podcast</p>
+            <p class="grey-body-text">In this 10mins program, James digs deep to learn the truth about guests who have
+              been painted as monsters by a culture
+              that passes judgment without fully understanding the situation. Every Thursday, tune in to learn the truth
+              from another
+              misunderstood outcast as they provide the context that is missing from their terrible story. <br><br>
+              <span>Hosted by James</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="main-section">
+      <!-- carousel of episodes -->
+      <h5 class="feature-heading mb-4">Feature podcasts</h5>
+      <div class="episodes-carousel scrollbar">
+        {% for episode in carousel_episodes[0:8]: %}
+        <a href="{{ url_for('get_podcast', podcast_id=episode.id) }}" data-id="{{ episode.id }}"
+          class="text-decoration-none me-4">
+          <img class="mb-3" src="{{ episode.img_url }}" alt="" width="300px">
+          <p class="feature-text">{{ episode.title }}</p>
+        </a>
+        {% endfor %}
+      </div>
+      <!-- live search and sort dropdown menu -->
+      <div class="filter pt-5 pb-4">
+        <input type="search" name="search-input" id="search-input" placeholder="Search for podcast">
+        <div class="dropdown">
+          <button class="grey-body-text dropdown-toggle" data-bs-toggle="dropdown">Sort by Release Date</button>
+          <ul class="dropdown-menu border border-light mt-2 py-0 border-opacity-10 dropdown-styling">
+            <li><a href="" data-active="False" class="dropdown-item newest">Newest first</a></li>
+            <li><a href="" data-active="False" class="dropdown-item oldest">Oldest first</a>
+            <li>
+          </ul>
+        </div>
+      </div>
+      <!-- Podcast List Section - in order: 4 at a time with a load more button-->
+      <div class="podcast_main_container">
+        <div class="podcast">
+          <a href="" data-id="" id="podcast-item">
+            <img src="" alt="" width="160px" height="160px" class="me-5" id="episode-img">
+            <div class="">
+              <p id="episode-num" class="text-size-md grey-body-text mb-0"></p>
+              <h4 id="episode-title"></h4>
+              <p id="episode-descr" class="grey-body-text mb-0"></p>
+              <div class="podcast-item-bottom">
+                <button class="listen-btn"><img src="/static/img/Vector.png" alt="" class="listen-img">LISTEN</button>
+                <p id="episode-date" class="grey-body-text ms-3 pt-3">
+                </p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="secondary-btn-with-arrow">
+        <button class="secondary-btn" id="load-more" data-limit="4"><i class="bi bi-arrow-down me-2"></i>Load
+          more</button>
+      </div>
+    </section>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='/js/main.js')}}"></script>
+</body>
+
+</html>
