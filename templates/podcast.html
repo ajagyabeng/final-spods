@@ -21,23 +21,21 @@
 <body>
   <div class="main-content">
     <section class="brand-section scrollbar">
-      <div class="p-4">
-        <img id="brand-logo" class="my-3 ms-3" src="/static/img/about/logo.svg" alt="podcast logo" width="315px"
-          height="315px">
+      <div class="brand-container">
+        <img id="brand-logo" src="/static/img/about/logo.svg" alt="podcast logo" width="315px" height="315px">
         <div id="about-description">
           <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
           <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
           </p>
           <div class="brand-links">
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/connect.svg" alt=""></a>
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/wifi-sign.svg" alt=""></a>
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/heart.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/connect.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/wifi-sign.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/heart.svg" alt=""></a>
           </div>
           <div class="about-text">
             <p class="text-size-md">About podcast</p>
             <p class="grey-body-text">In this 10mins program, James digs deep to learn the truth about guests who have
-              been
-              painted as monsters by a culture
+              been painted as monsters by a culture
               that passes judgment without fully understanding the situation. Every Thursday, tune in to learn the truth
               from another
               misunderstood outcast as they provide the context that is missing from their terrible story. <br><br>
@@ -47,17 +45,17 @@
         </div>
       </div>
     </section>
-    <section class="main-section p-5">
+    <section class="main-section">
       <!-- EPISODE -->
       <div class="current-episode">
-        <div class="mt-4">
+        <div class="episode-container">
           <a href="{{ url_for('home') }}" class="secondary-btn py-3"><i class="bi bi-arrow-left pe-2"></i>Back to
             podcasts</a>
-          <h1 class="episode-title mt-5">{{ episode.title }}</h1>
+          <h1 class="episode-title">{{ episode.title }}</h1>
           <p class="episode-description grey-body-text">{{ episode.description }}</p>
-          <p class="green-text mb-3">{{ episode.episode }} / {{ episode.date_added }}</p>
+          <p class="green-text">{{ episode.episode }} / {{ episode.date_added }}</p>
           <div class="spotify-episode">
-            <iframe class="mb-4 mt-3" style="border-radius:12px"
+            <iframe class="my-4" style="border-radius:12px"
               src="https://open.spotify.com/embed/episode/2qpVjDkUADL89xumvBGXfV?utm_source=generator&theme=0"
               width="100%" height="152" frameBorder="0" allowfullscreen=""
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>

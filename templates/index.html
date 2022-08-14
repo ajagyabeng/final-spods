@@ -23,17 +23,17 @@
 <body>
   <div class="main-content">
     <section class="brand-section scrollbar">
-      <div class="p-4">
-        <img id="brand-logo" class="my-3 ms-3" src="/static/img/about/logo.svg" alt="podcast logo" width="315px"
+      <div class="brand-container">
+        <img id="brand-logo" src="/static/img/about/logo.svg" alt="podcast logo" width="315px"
           height="315px">
         <div id="about-description">
           <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
           <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
           </p>
           <div class="brand-links">
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/connect.svg" alt=""></a>
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/wifi-sign.svg" alt=""></a>
-            <a href=""><img class="brand-link-img pe-3" src="/static/img/about/heart.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/connect.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/wifi-sign.svg" alt=""></a>
+            <a href=""><img class="brand-link-img" src="/static/img/about/heart.svg" alt=""></a>
           </div>
           <div class="about-text">
             <p class="text-size-md">About podcast</p>
@@ -50,18 +50,18 @@
     </section>
     <section class="main-section">
       <!-- carousel of episodes -->
-      <h5 class="feature-heading mb-4">Feature podcasts</h5>
+      <h5 class="feature-heading">Feature podcasts</h5>
       <div class="episodes-carousel scrollbar">
         {% for episode in carousel_episodes[0:8]: %}
         <a href="{{ url_for('get_podcast', podcast_id=episode.id) }}" data-id="{{ episode.id }}"
-          class="text-decoration-none me-4">
+          class="text-decoration-none carousel-cards">
           <img class="mb-3" src="{{ episode.img_url }}" alt="" width="300px">
           <p class="feature-text">{{ episode.title }}</p>
         </a>
         {% endfor %}
       </div>
       <!-- live search and sort dropdown menu -->
-      <div class="filter pt-5 pb-4">
+      <div class="filter">
         <input type="search" name="search-input" id="search-input" placeholder="Search for podcast">
         <div class="dropdown">
           <button class="grey-body-text dropdown-toggle" data-bs-toggle="dropdown">Sort by Release Date</button>
@@ -76,14 +76,14 @@
       <div class="podcast_main_container">
         <div class="podcast">
           <a href="" data-id="" id="podcast-item">
-            <img src="" alt="" width="160px" height="160px" class="me-5" id="episode-img">
+            <img src="" alt="" width="160px" height="160px" id="episode-img">
             <div class="">
-              <p id="episode-num" class="text-size-md grey-body-text mb-0"></p>
+              <p id="episode-num" class="text-size-md grey-body-text"></p>
               <h4 id="episode-title"></h4>
-              <p id="episode-descr" class="grey-body-text mb-0"></p>
+              <p id="episode-descr" class="grey-body-text"></p>
               <div class="podcast-item-bottom">
                 <button class="listen-btn"><img src="/static/img/Vector.png" alt="" class="listen-img">LISTEN</button>
-                <p id="episode-date" class="grey-body-text ms-3 pt-3">
+                <p id="episode-date" class="grey-body-text">
                 </p>
               </div>
             </div>
@@ -91,7 +91,7 @@
         </div>
       </div>
       <div class="secondary-btn-with-arrow">
-        <button class="secondary-btn" id="load-more" data-limit="4"><i class="bi bi-arrow-down me-2"></i>Load
+        <button class="secondary-btn" id="load-more" data-limit="4"><i class="bi bi-arrow-down"></i>Load
           more</button>
       </div>
     </section>
