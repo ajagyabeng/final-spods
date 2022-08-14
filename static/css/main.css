@@ -382,3 +382,14 @@ bi-arrow-left {
     display: none;
   }
 }
+
+@media screen and (max-width: 500px) {
+  #search-input {
+    width: 150px;
+    font-size: 0.7rem;
+  }
+
+  .dropdown {
+    font-size: 0.7rem;
+  }
+}
