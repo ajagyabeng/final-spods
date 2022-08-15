@@ -131,10 +131,10 @@ class Spods(db.Model):
 # )
 
 # db.session.commit()
-for i in range(19, 55):
-    pod_to_delete = Spods.query.get(id=i)
-    db.session.delete(pod_to_delete)
-    db.session.commit()
+# for i in range(19, 55):
+#     pod_to_delete = Spods.query.get(id=i)
+#     db.session.delete(pod_to_delete)
+#     db.session.commit()
 
 
 def format_result(result):
