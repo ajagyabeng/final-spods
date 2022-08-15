@@ -133,13 +133,13 @@ h5 {
   background-color: #070707;
 }
 
-.dropdown-styling li a {
+.dropdown-styling li {
   color: #fff;
   padding: 10px 0;
   text-align: center;
 }
 
-.dropdown-styling li a:hover {
+.dropdown-styling li:hover {
   cursor: pointer;
   background-color: #121212;
   color: #fff;
@@ -260,6 +260,7 @@ bi-arrow-left {
 
 .episode-container {
   margin-top: 20px;
+  padding: 40px 15px 0 30px;
 }
 
 .episode-title {
@@ -269,7 +270,7 @@ bi-arrow-left {
 .current-episode img {
   width: 300px;
   height: 300px;
-  margin: 20px;
+  padding: 25px;
 }
 
 .green-text {
