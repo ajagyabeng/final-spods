@@ -67,19 +67,20 @@
         <!-- live search and sort dropdown menu -->
         <div class="filter">
           <input type="search" name="search-input" id="search-input" placeholder="Search for podcast">
+
+          <!-- SORT PODCASTS -->
           <div class="dropdown">
             <button class="grey-body-text dropdown-toggle" data-bs-toggle="dropdown">Sort by Release Date</button>
-            <ul class="dropdown-menu border border-light mt-2 py-0 border-opacity-10 dropdown-styling">
-              <li><a href="" data-active="False" class="dropdown-item newest">Newest first</a></li>
-              <li><a href="" data-active="False" class="dropdown-item oldest">Oldest first</a>
-              <li>
+            <ul class="sort-by-li-group dropdown-menu border border-light mt-2 py-0 border-opacity-10 dropdown-styling">
+              <li class="sort-btn newest" data-sort-value="newest">Newest first</li>
+              <li class="sort-btn oldest" data-sort-value="oldest">Oldest first</li>
             </ul>
           </div>
         </div>
         <!-- Podcast List Section - in order: 4 at a time with a load more button-->
         <div class="podcast_main_container">
-          <div class="podcast">
-            <a href="" data-id="" id="podcast-item">
+          <div class="podcast" data-id="">
+            <a href="" id="podcast-item">
               <img src="" alt="" width="160px" height="160px" id="episode-img">
               <div class="">
                 <p id="episode-num" class="text-size-md grey-body-text"></p>
@@ -113,10 +114,18 @@
       </div>
     </section>
   </div>
+
+  <!-- Bootstrap js link -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
     crossorigin="anonymous"></script>
-  <script src="{{ url_for('static', filename='/js/main.js')}}"></script>
+
+    <!-- isotope sorting CDN link -->
+  <!-- <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script> -->
+  <!-- <script src="/static/js/isotope.js"></script> -->
+
+  <!-- main js link -->
+  <script src="/static/js/main.js"></script>
 </body>
 
 </html>
