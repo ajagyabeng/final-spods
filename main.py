@@ -31,7 +31,7 @@ class Spods(db.Model):
     date_added = db.Column(db.String())
 
 
-db.create_all()
+# db.create_all()
 
 
 # Add items to database
@@ -132,7 +132,9 @@ db.create_all()
 
 # db.session.commit()
 for i in range(19, 55):
-    Spods.query.filter_by(id=i).delete()
+    pod_to_delete = Spods.query.get(id=i)
+    db.session.delete(pod_to_delete)
+    db.session.commit()
 
 
 def format_result(result):
