@@ -15,7 +15,7 @@ DATABASE_URI = os.environ.get('DATABASE_URL1')
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = APP_SECRET_KEY
-app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://qciwukyvpesjfy:a78dc279fd606c4f9526c6295ae7b088c87a060a60ea92d39ab18bec9d6918f4@ec2-34-193-44-192.compute-1.amazonaws.com:5432/dcrv1un8lon7q1"
+app.config['SQLALCHEMY_DATABASE_URI'] = DATABASE_URI
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 Bootstrap(app)
@@ -133,6 +133,7 @@ db.create_all()
 # db.session.commit()
 for i in range(19, 55):
     Spods.query.filter_by(id=i).delete()
+
 
 def format_result(result):
     """formats result into a dictionary"""
