@@ -81,13 +81,11 @@ h5 {
 }
 
 /* BRAND SECTION */
-
-/* .main-content {
-  padding-top: 24px;
-} */
+#brand-logo {
+  margin-bottom: 40px;
+}
 
 .brand-links {
-  padding: 10px 0 30px;
   border-bottom: solid 1px #131313;
 }
 
@@ -110,6 +108,10 @@ h5 {
   margin-right: 20px;
 }
 
+.carousel-cards img {
+  width: 300px;
+}
+
 .episodes-carousel {
   display: flex;
   overflow-x: scroll;
@@ -124,6 +126,7 @@ h5 {
 .dropdown button {
   background-color: transparent;
   padding-top: 20px;
+  border: none;
 }
 
 .dropdown-styling {
@@ -202,6 +205,7 @@ input[type="search"]::-webkit-search-results-decoration {
   margin: 12px 0 0;
   color: #fff;
   border-radius: 50px;
+  border-color: transparent;
   font-size: 12px;
 }
 
@@ -221,7 +225,7 @@ bi-arrow-left {
 }
 
 .secondary-btn {
-  background: #000;
+  background: #070707;
   border: 2px solid rgb(35, 35, 35);
   height: 50px;
   padding: 0 35px;
@@ -239,6 +243,19 @@ bi-arrow-left {
   border-color: rgb(63, 62, 62);
 }
 
+/* MOBILE ABOUT SECTION */
+#mobile-about-section {
+  padding: 40px 0;
+  background-color: #121212;
+  overflow: scroll;
+  display: none;
+}
+
+.mobile-about-text {
+  width: 80%;
+  margin: 0 auto 0 auto;
+}
+
 /* PODCAST PAGE STYLING */
 
 .episode-container {
@@ -249,12 +266,18 @@ bi-arrow-left {
   margin-top: 40px;
 }
 
+.current-episode img {
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+}
+
 .green-text {
   color: #48a44f;
 }
 
 /* MEDIA QUERIES */
-@media screen and (min-width: 994px) {
+@media screen and (min-width: 992px) {
   .main-content {
     display: flex;
     position: relative;
@@ -262,15 +285,16 @@ bi-arrow-left {
     height: auto;
     min-height: 100vh;
   }
+
   .brand-section {
-    min-width: 400px;
     width: 30%;
-    overflow-y: scroll;
+    overflow: scroll;
     background-color: #121111;
     position: fixed;
+    top: 0px;
     height: 100vh;
-    margin-left: auto;
-    margin-right: auto;
+    min-width: 400px;
+    max-width: 400px;
   }
 
   .brand-container {
@@ -279,13 +303,13 @@ bi-arrow-left {
     margin-top: 40px;
   }
 
-  #brand-logo {
-    margin-bottom: 40px;
-  }
-
   .main-section {
     width: 70%;
     margin-left: auto;
+  }
+
+  .content-section {
+    width: 100%;
     padding: 35px;
   }
 
@@ -299,41 +323,7 @@ bi-arrow-left {
   }
 }
 
-@media screen and (max-width: 767px) {
-  .main-content {
-    display: block;
-    position: relative;
-    height: auto;
-    min-height: 100vh;
-    align-content: center;
-    width: 90%;
-    margin: auto;
-  }
-
-  #brand-logo {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto;
-    display: block;
-    padding-top: 20px;
-    margin-bottom: 20px;
-  }
-
-  #brand-logo-container {
-    margin: 0 auto;
-  }
-
-  .about-head {
-    text-align: center;
-    font-size: 0.8rem;
-  }
-
-  #episode-img {
-    display: none;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 993px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .main-content {
     display: flex;
     position: relative;
@@ -365,17 +355,21 @@ bi-arrow-left {
   }
 
   #brand-logo {
-    width: 250px;
-    height: 250px;
+    width: 240px;
+    height: 240px;
     /* margin: 0 auto; */
     display: block;
     /* padding-top: 20px; */
-    padding-right: 25px;
-    margin-bottom: 20px;
+    /* padding-right: 25px;
+    margin-bottom: 20px; */
   }
 
   #brand-logo {
     margin-bottom: 40px;
+  }
+
+  .carousel-cards img {
+    width: 240px;
   }
 
   #episode-img {
@@ -383,13 +377,93 @@ bi-arrow-left {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 767px) {
+  .main-content {
+    display: block;
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    align-content: center;
+    width: 100%;
+    margin: auto;
+  }
+
+  .brand-section {
+    display: block;
+    background-color: #121111;
+  }
+
+  #brand-head {
+    padding: 40px;
+  }
+
+  #brand-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+  }
+
+  .about-head {
+    text-align: center;
+    padding-top: 10px;
+  }
+
+  .about-text {
+    display: none;
+  }
+
+  .main-section {
+    padding: 25px;
+  }
+
+  h5 {
+    font-size: 1.25rem;
+  }
+
+  .carousel-cards img {
+    width: 240px;
+  }
+
+  #episode-img {
+    display: none;
+  }
+
+  .secondary-btn {
+    width: 100%;
+  }
+
+  #mobile-about-section {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* MOBILE */
+@media screen and (max-width: 479px) {
+  .filter {
+    display: block;
+  }
+
   #search-input {
-    width: 150px;
-    font-size: 0.7rem;
+    width: 100%;
   }
 
   .dropdown {
-    font-size: 0.7rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  .current-episode img {
+    width: 190px;
+    height: 190px;
+  }
+  .episodes-carousel img {
+    width: 190px;
+    height: 190px;
+  }
+  .about-text {
+    display: none;
   }
 }

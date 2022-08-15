@@ -24,17 +24,17 @@
   <div class="main-content">
     <section class="brand-section scrollbar">
       <div class="brand-container">
-        <div id="brand-logo-container">
+        <div id="brand-head">
           <img id="brand-logo" src="/static/img/about/logo.svg" alt="podcast logo">
-        </div>
-        <div class="about-head">
-          <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
-          <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
-          </p>
-          <div class="brand-links">
-            <a href=""><img class="brand-link-img" src="/static/img/about/connect.svg" alt=""></a>
-            <a href=""><img class="brand-link-img" src="/static/img/about/wifi-sign.svg" alt=""></a>
-            <a href=""><img class="brand-link-img" src="/static/img/about/heart.svg" alt=""></a>
+          <div class="about-head">
+            <h4 class="brand-title">Spods 10<sup><small>TM</small></sup></h4>
+            <p class="text-size-md grey-body-text">Speaking with the most misundertood designer in the field in 10mins.
+            </p>
+            <div class="brand-links">
+              <a href=""><img class="brand-link-img" src="/static/img/about/connect.svg" alt=""></a>
+              <a href=""><img class="brand-link-img" src="/static/img/about/wifi-sign.svg" alt=""></a>
+              <a href=""><img class="brand-link-img" src="/static/img/about/heart.svg" alt=""></a>
+            </div>
           </div>
         </div>
         <div id="about-description">
@@ -53,49 +53,63 @@
     </section>
     <section class="main-section">
       <!-- carousel of episodes -->
-      <h5 class="feature-heading">Feature podcasts</h5>
-      <div class="episodes-carousel scrollbar">
-        {% for episode in carousel_episodes[0:8]: %}
-        <a href="{{ url_for('get_podcast', podcast_id=episode.id) }}" data-id="{{ episode.id }}"
-          class="text-decoration-none carousel-cards">
-          <img class="mb-3" src="{{ episode.img_url }}" alt="" width="300px">
-          <p class="feature-text">{{ episode.title }}</p>
-        </a>
-        {% endfor %}
-      </div>
-      <!-- live search and sort dropdown menu -->
-      <div class="filter">
-        <input type="search" name="search-input" id="search-input" placeholder="Search for podcast">
-        <div class="dropdown">
-          <button class="grey-body-text dropdown-toggle" data-bs-toggle="dropdown">Sort by Release Date</button>
-          <ul class="dropdown-menu border border-light mt-2 py-0 border-opacity-10 dropdown-styling">
-            <li><a href="" data-active="False" class="dropdown-item newest">Newest first</a></li>
-            <li><a href="" data-active="False" class="dropdown-item oldest">Oldest first</a>
-            <li>
-          </ul>
-        </div>
-      </div>
-      <!-- Podcast List Section - in order: 4 at a time with a load more button-->
-      <div class="podcast_main_container">
-        <div class="podcast">
-          <a href="" data-id="" id="podcast-item">
-            <img src="" alt="" width="160px" height="160px" id="episode-img">
-            <div class="">
-              <p id="episode-num" class="text-size-md grey-body-text"></p>
-              <h4 id="episode-title"></h4>
-              <p id="episode-descr" class="grey-body-text"></p>
-              <div class="podcast-item-bottom">
-                <button class="listen-btn"><img src="/static/img/Vector.png" alt="" class="listen-img">LISTEN</button>
-                <p id="episode-date" class="grey-body-text">
-                </p>
-              </div>
-            </div>
+      <div class="content-section">
+        <h5 class="feature-heading">Feature podcasts</h5>
+        <div class="episodes-carousel scrollbar">
+          {% for episode in carousel_episodes[0:8]: %}
+          <a href="{{ url_for('get_podcast', podcast_id=episode.id) }}" data-id="{{ episode.id }}"
+            class="text-decoration-none carousel-cards">
+            <img class="mb-3" src="{{ episode.img_url }}" alt="">
+            <p class="feature-text">{{ episode.title }}</p>
           </a>
+          {% endfor %}
+        </div>
+        <!-- live search and sort dropdown menu -->
+        <div class="filter">
+          <input type="search" name="search-input" id="search-input" placeholder="Search for podcast">
+          <div class="dropdown">
+            <button class="grey-body-text dropdown-toggle" data-bs-toggle="dropdown">Sort by Release Date</button>
+            <ul class="dropdown-menu border border-light mt-2 py-0 border-opacity-10 dropdown-styling">
+              <li><a href="" data-active="False" class="dropdown-item newest">Newest first</a></li>
+              <li><a href="" data-active="False" class="dropdown-item oldest">Oldest first</a>
+              <li>
+            </ul>
+          </div>
+        </div>
+        <!-- Podcast List Section - in order: 4 at a time with a load more button-->
+        <div class="podcast_main_container">
+          <div class="podcast">
+            <a href="" data-id="" id="podcast-item">
+              <img src="" alt="" width="160px" height="160px" id="episode-img">
+              <div class="">
+                <p id="episode-num" class="text-size-md grey-body-text"></p>
+                <h4 id="episode-title"></h4>
+                <p id="episode-descr" class="grey-body-text"></p>
+                <div class="podcast-item-bottom">
+                  <button class="listen-btn"><img src="/static/img/Vector.svg" alt="" class="listen-img">LISTEN</button>
+                  <p id="episode-date" class="grey-body-text">
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="secondary-btn-with-arrow">
+          <button class="secondary-btn" id="load-more" data-limit="4"><i class="bi bi-arrow-down me-2"></i>Load
+            more</button>
         </div>
       </div>
-      <div class="secondary-btn-with-arrow">
-        <button class="secondary-btn" id="load-more" data-limit="4"><i class="bi bi-arrow-down me-2"></i>Load
-          more</button>
+    </section>
+    <section id="mobile-about-section">
+      <div class="mobile-about-text">
+        <p class="text-size-md">About podcast</p>
+        <p class="grey-body-text">In this 10mins program, James digs deep to learn the truth about guests who have
+          been painted as monsters by a culture
+          that passes judgment without fully understanding the situation. Every Thursday, tune in to learn the truth
+          from another
+          misunderstood outcast as they provide the context that is missing from their terrible story. <br><br>
+          <span>Hosted by James</span>
+        </p>
       </div>
     </section>
   </div>
