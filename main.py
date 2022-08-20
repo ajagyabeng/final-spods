@@ -131,11 +131,6 @@ class Spods(db.Model):
 # )
 
 # db.session.commit()
-# for i in range(19, 55):
-#     pod_to_delete = Spods.query.get(id=i)
-#     db.session.delete(pod_to_delete)
-#     db.session.commit()
-
 
 def format_result(result):
     """formats result into a dictionary"""
@@ -177,20 +172,21 @@ def get_podcast(podcast_id):
 def search_podcast():
     """takes the search keyword and queries the title and description of the database if keyword is in either"""
     search_text = request.args.get('podcast')
-    if search_text == '':
-        result = Spods.query.limit(limit_value).all()
-    else:
-        # it queries the title and description for the search keyword.
-        result = Spods.query.filter(db.or_(Spods.title.ilike(
-            f"%{search_text}%"), Spods.description.ilike(f"%{search_text}%"))).all()
+    # it queries the title and description for the search keyword.
+    result = Spods.query.filter(db.or_(Spods.title.ilike(
+        f"%{search_text}%"), Spods.description.ilike(f"%{search_text}%"))).all()
     result_list = [format_result(item) for item in result]
     return {"podcasts": result_list}
 
 
-@app.route('/load-newest')
-def sort_newest():
+@app.route('/sort-podcasts')
+def sort_podcast():
     """sorts podcasts in descending order according to id"""
-    result = Spods.query.order_by(Spods.id.desc()).all()
+    sort_category = request.args.get('sort_by')
+    if sort_category == "newest":
+        result = Spods.query.order_by(Spods.id.desc()).all()
+    else:
+        result = Spods.query.order_by(Spods.id.asc()).all()
     result_list = [format_result(item) for item in result]
     return {"podcasts": result_list}
 
