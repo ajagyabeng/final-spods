@@ -287,6 +287,7 @@ bi-arrow-left {
 
 .episode-container {
   padding-top: 40px;
+  padding-left: 20px;
 }
 
 .episode-title {
@@ -455,11 +456,20 @@ bi-arrow-left {
 
   .secondary-btn {
     width: 100%;
+    text-align: center;
   }
 
   #mobile-about-section {
     display: block;
     text-align: center;
+  }
+
+  .episode-container {
+    padding: 0;
+  }
+
+  .episode-container .secondary-btn {
+    display: block;
   }
 }
 
@@ -488,5 +498,13 @@ bi-arrow-left {
   }
   .about-text {
     display: none;
+  }
+
+  .episode-container {
+    padding: 0;
+  }
+
+  .episode-container .secondary-btn {
+    display: block;
   }
 }
