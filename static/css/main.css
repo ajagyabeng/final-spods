@@ -287,7 +287,7 @@ bi-arrow-left {
 
 .episode-container {
   padding-top: 40px;
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 .episode-title {
@@ -343,6 +343,7 @@ bi-arrow-left {
 
   .current-episode {
     display: flex;
+    padding: 30px;
   }
 
   #brand-logo {
