@@ -1,41 +1,22 @@
 // ------------------FUNCTIONS---------------------------------------------------
-function loadPodcastListData(start, end) {
+function loadPodcastListData() {
   /* fetches podcasts from server and renders the numner of podcasts (from the parameters) to the homepage */
   fetch("/load-home-data")
     .then((data) => {
-      // console.log(data)
       return data.json();
     })
     .then((completedata) => {
       const episode_list = completedata.podcasts;
-      createPodcastItem(loadPodcasts(episode_list, start, end));
+      createPodcastItem(episode_list);
     });
-}
-
-function loadMorePodcasts(start, end) {
-/* function to load data for appending when load more button is clicked */
-  fetch("/load-home-data")
-    .then((data) => {
-      // console.log(data)
-      return data.json();
-    })
-    .then((completedata) => {
-      const episode_list = completedata.podcasts;
-      appendPodcastItem(loadPodcasts(episode_list, start, end));
-    });
-}
-
-function loadPodcasts(data, start, end) {
-  /* slices an array from start to end and return items in the array */
-  return data.slice(start, end);
 }
 
 function createPodcastItem(data) {
   /* creates podcast item to be added to the webpage at the podcast list section */
   let episodeData = "";
   data.forEach((episode) => {
-    episodeData += `<div class="podcast">
-          <a href="/podcast/${episode.id}" data-id="${episode.id}" id="podcast-item">
+    episodeData += `<div class="podcast" data-id="${episode.id}">
+          <a href="/podcast/${episode.id}" id="podcast-item">
             <img src="${episode.img_url}" alt="" width="160px" height="160px" class="me-5" id="episode-img">
             <div class="">
               <p id="episode-num" class="text-size-md grey-body-text mb-0">${episode.episode}</p>
@@ -56,8 +37,8 @@ function createPodcastItem(data) {
 function appendPodcastItem(data) {
   /* adds the items fetched from the load more button to be displayed */
   data.forEach((episode) => {
-    const podcastNode = document.createElement("div")
-    podcastNode.classList.add('podcast')
+    const podcastNode = document.createElement("div");
+    podcastNode.classList.add("podcast");
     const episodeData = `
           <a href="/podcast/${episode.id}" data-id="${episode.id}" id="podcast-item">
             <img src="${episode.img_url}" alt="" width="160px" height="160px" class="me-5" id="episode-img">
@@ -73,73 +54,91 @@ function appendPodcastItem(data) {
             </div>
           </a>
         `;
-    const podcastContainer = document.querySelector(".podcast_main_container")
-    podcastNode.innerHTML = episodeData
-    podcastContainer.appendChild(podcastNode)
-    
+    const podcastContainer = document.querySelector(".podcast_main_container");
+    podcastNode.innerHTML = episodeData;
+    podcastContainer.appendChild(podcastNode);
   });
 }
 
 function sortPodcasts(e) {
   /* sorts podcast in descending order(newest to oldest) */
-  e.preventDefault()
-  // console.log(e)
-  fetch('/load-newest')
+  const sortValue = e.target.getAttribute("data-sort-value");
+  fetch(`/sort-podcasts?sort_by=${sortValue}`)
     .then((data) => {
-      return data.json()
+      return data.json();
     })
     .then((completedata) => {
       const episode_list = completedata.podcasts;
-      createPodcastItem(loadPodcasts(episode_list, start, end))
-    })
+      createPodcastItem(episode_list);
+    });
 }
-//-----------------------------------END OF FUNCTIONS--------------------------------------------
+/*-----------------------------------END OF FUNCTIONS--------------------------------------------*/
 
-// Code to load more
-const loadMoreBtn = document.getElementById("load-more");
-let buttonClickCount = 0
-let start = 0
-let end = 4
-loadMoreBtn.addEventListener("click", function(e) {
-  buttonClickCount += 1
-  if(buttonClickCount < 4) {
-    start += 4
-    end += 4
-    loadMorePodcasts(start, end)
-  }else {
-    loadMorePodcasts(16, 18)
-    const parent = loadMoreBtn.parentNode;
-    parent.removeChild(loadMoreBtn)
+/*---------------------------------------------ON PAGE LOAD-----------------------------------------------*/
+loadPodcastListData();
+
+/*---------------------------------------------LOAD MORE FUNCTIONALITY-----------------------------------------------*/
+let loadMoreBtn = document.getElementById("load-more");
+let currentItem = 4;
+loadMoreBtn.addEventListener("click", () => {
+  let podcasts = [
+    ...document.querySelectorAll(
+      ".content-section .podcast_main_container .podcast"
+    ),
+  ];
+  for (var i = currentItem; i < currentItem + 4; i++) {
+    podcasts[i].style.display = "contents";
   }
+  currentItem += 4;
 
+  if (currentItem >= podcasts.length) {
+    loadMoreBtn.style.display = "none";
+  }
 });
 
-// function call is executed on page load.
-loadPodcastListData(5, 9);
-
-// Code for search function
+/*---------------------------------------------LIVE SEARCH FUNCTIONALITY-----------------------------------------------*/
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("keyup", searchItem);
 
 async function searchItem(e) {
   /* fetches and displays the podcast that match the search input */
-  console.log(e);
   podcastName = searchInput.value;
+  console.log(podcastName);
   if (podcastName) {
     const response = await fetch(`/search?podcast=${podcastName}`);
     const data = await response.json();
     console.log(data.podcasts);
     createPodcastItem(data.podcasts);
   } else {
-    loadPodcastListData(5, 9);
+    // check if a sort button has been selected and return podcast list in that order
+    var sortButtonGroups = document.querySelectorAll(".sort-btn");
+    for (i = 0; i < sortButtonGroups.length; i++) {
+      if (sortButtonGroups[i].classList.contains("is-checked")) {
+        const sortValue = sortButtonGroups[i].getAttribute("data-sort-value");
+        fetch(`/sort-podcasts?sort_by=${sortValue}`)
+          .then((data) => {
+            return data.json();
+          })
+          .then((completedata) => {
+            const episode_list = completedata.podcasts;
+            createPodcastItem(loadPodcasts(episode_list, start, end));
+          });
+      }
+    }
   }
 }
 
-// Code to sort podcast display to newest or oldest
-const sortNewest = document.querySelector('.newest')
-const sortOldest = document.querySelector('.oldest')
-sortNewest.addEventListener('click', sortPodcasts);
-sortOldest.addEventListener('click', function(e) {
-  e.preventDefault()
-  loadPodcastListData(0, 4);
-})
+/*-------------------------------------------------------SORT FUNCTIONALITY--------------------------------------------------------------*/
+const sortPodcastEpisodes = document.querySelector(".sort-by-button-group");
+sortPodcastEpisodes.addEventListener("click", sortPodcasts);
+
+// change is-checked class on buttons (snippet from isotope)
+var buttonGroups = document.querySelectorAll(".button-group");
+for (var i = 0; i < buttonGroups.length; i++) {
+  buttonGroups[i].addEventListener("click", onButtonGroupClick);
+}
+function onButtonGroupClick(event) {
+  var button = event.target;
+  button.parentNode.querySelector(".is-checked").classList.remove("is-checked");
+  button.classList.add("is-checked");
+}
