@@ -72,31 +72,43 @@ function sortPodcasts(e) {
       createPodcastItem(episode_list);
     });
 }
-/*-----------------------------------END OF FUNCTIONS--------------------------------------------*/
+/*---------------------END OF FUNCTIONS-------------------------------*/
 
-/*---------------------------------------------ON PAGE LOAD-----------------------------------------------*/
+/*------------------------------ON PAGE LOAD--------------------------------*/
 loadPodcastListData();
 
-/*---------------------------------------------LOAD MORE FUNCTIONALITY-----------------------------------------------*/
+/*---------------------LOAD MORE FUNCTIONALITY-------------------------------*/
 let loadMoreBtn = document.getElementById("load-more");
 let currentItem = 4;
+let loopEndValue = 0;
 loadMoreBtn.addEventListener("click", () => {
   let podcasts = [
     ...document.querySelectorAll(
       ".content-section .podcast_main_container .podcast"
     ),
   ];
-  for (var i = currentItem; i < currentItem + 4; i++) {
-    podcasts[i].style.display = "contents";
+
+  /*Check for number of items left in podcasts list to set limit of the loop*/
+  if (podcasts.length - currentItem >= 4) {
+    loopEndValue = 4;
+  } else {
+    loopEndValue = podcasts - currentItem;
+  }
+  /*------------------------end of check-------------------------------*/
+
+  for (var i = currentItem; i < currentItem + loopEndValue; i++) {
+    podcasts[i].setAttribute("style", "display: contents;");
   }
   currentItem += 4;
+  console.log(currentItem, podcasts.length);
 
   if (currentItem >= podcasts.length) {
     loadMoreBtn.style.display = "none";
   }
 });
+/*-----------------END OF LOAD MORE FUNCTIONALITY---------------------------------*/
 
-/*---------------------------------------------LIVE SEARCH FUNCTIONALITY-----------------------------------------------*/
+/*-----------------------LIVE SEARCH FUNCTIONALITY-----------------------------*/
 const searchInput = document.getElementById("search-input");
 searchInput.addEventListener("keyup", searchItem);
 
@@ -107,7 +119,6 @@ async function searchItem(e) {
   if (podcastName) {
     const response = await fetch(`/search?podcast=${podcastName}`);
     const data = await response.json();
-    console.log(data.podcasts);
     createPodcastItem(data.podcasts);
   } else {
     // check if a sort button has been selected and return podcast list in that order
@@ -121,14 +132,15 @@ async function searchItem(e) {
           })
           .then((completedata) => {
             const episode_list = completedata.podcasts;
-            createPodcastItem(loadPodcasts(episode_list, start, end));
+            createPodcastItem(episode_list);
           });
       }
     }
   }
 }
+/*----------------------END OF LIVE SEARCH FUNCTIONALITY-----------------------------*/
 
-/*-------------------------------------------------------SORT FUNCTIONALITY--------------------------------------------------------------*/
+/*-------------------------SORT FUNCTIONALITY----------------------------------------*/
 const sortPodcastEpisodes = document.querySelector(".sort-by-button-group");
 sortPodcastEpisodes.addEventListener("click", sortPodcasts);
 
@@ -142,3 +154,4 @@ function onButtonGroupClick(event) {
   button.parentNode.querySelector(".is-checked").classList.remove("is-checked");
   button.classList.add("is-checked");
 }
+/*--------------------END OF SORT FUNCTIONALITY---------------------------*/
