@@ -34,31 +34,31 @@ function createPodcastItem(data) {
   });
 }
 
-function appendPodcastItem(data) {
-  /* adds the items fetched from the load more button to be displayed */
-  data.forEach((episode) => {
-    const podcastNode = document.createElement("div");
-    podcastNode.classList.add("podcast");
-    const episodeData = `
-          <a href="/podcast/${episode.id}" data-id="${episode.id}" id="podcast-item">
-            <img src="${episode.img_url}" alt="" width="160px" height="160px" class="me-5" id="episode-img">
-            <div class="">
-              <p id="episode-num" class="text-size-md grey-body-text mb-0">${episode.episode}</p>
-              <h4 id="episode-title">${episode.title}</h4>
-              <p id="episode-descr" class="grey-body-text mb-0">${episode.description}</p>
-              <div class="podcast-item-bottom">
-                <button class="listen-btn"><img src="/static/img/Vector.png" alt="" class="listen-img">LISTEN</button>
-                <p id="episode-date" class="grey-body-text ms-3 pt-3">${episode.date_added}
-                </p>
-              </div>
-            </div>
-          </a>
-        `;
-    const podcastContainer = document.querySelector(".podcast_main_container");
-    podcastNode.innerHTML = episodeData;
-    podcastContainer.appendChild(podcastNode);
-  });
-}
+// function appendPodcastItem(data) {
+//   /* adds the items fetched from the load more button to be displayed */
+//   data.forEach((episode) => {
+//     const podcastNode = document.createElement("div");
+//     podcastNode.classList.add("podcast");
+//     const episodeData = `
+//           <a href="/podcast/${episode.id}" data-id="${episode.id}" id="podcast-item">
+//             <img src="${episode.img_url}" alt="" width="160px" height="160px" class="me-5" id="episode-img">
+//             <div class="">
+//               <p id="episode-num" class="text-size-md grey-body-text mb-0">${episode.episode}</p>
+//               <h4 id="episode-title">${episode.title}</h4>
+//               <p id="episode-descr" class="grey-body-text mb-0">${episode.description}</p>
+//               <div class="podcast-item-bottom">
+//                 <button class="listen-btn"><img src="/static/img/Vector.png" alt="" class="listen-img">LISTEN</button>
+//                 <p id="episode-date" class="grey-body-text ms-3 pt-3">${episode.date_added}
+//                 </p>
+//               </div>
+//             </div>
+//           </a>
+//         `;
+//     const podcastContainer = document.querySelector(".podcast_main_container");
+//     podcastNode.innerHTML = episodeData;
+//     podcastContainer.appendChild(podcastNode);
+//   });
+// }
 
 function sortPodcasts(e) {
   /* sorts podcast in descending order(newest to oldest) */
@@ -92,11 +92,12 @@ loadMoreBtn.addEventListener("click", () => {
   if (podcasts.length - currentItem >= 4) {
     loopEndValue = 4;
   } else {
-    loopEndValue = podcasts - currentItem;
+    loopEndValue = podcasts.length - currentItem;
   }
   /*------------------------end of check-------------------------------*/
 
   for (var i = currentItem; i < currentItem + loopEndValue; i++) {
+    console.log(value);
     podcasts[i].setAttribute("style", "display: contents;");
   }
   currentItem += 4;
