@@ -97,7 +97,6 @@ loadMoreBtn.addEventListener("click", () => {
   /*------------------------end of check-------------------------------*/
 
   for (var i = currentItem; i < currentItem + loopEndValue; i++) {
-    console.log(value);
     podcasts[i].setAttribute("style", "display: contents;");
   }
   currentItem += 4;
