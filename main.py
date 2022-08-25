@@ -173,8 +173,13 @@ def search_podcast():
     """takes the search keyword and queries the title and description of the database if keyword is in either"""
     search_text = request.args.get('podcast')
     # it queries the title and description for the search keyword.
-    result = Spods.query.filter(db.or_(Spods.title.ilike(
-        f"%{search_text}%"), Spods.description.ilike(f"%{search_text}%"))).all()
+    if search_text != "":
+        result = Spods.query.filter(db.or_(Spods.title.ilike(
+            f"%{search_text}%"), Spods.description.ilike(f"%{search_text}%"))).all()
+
+    else:
+        result = Spods.query.order_by("id").all()
+    print(len(result))
     result_list = [format_result(item) for item in result]
     return {"podcasts": result_list}
 

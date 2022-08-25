@@ -205,7 +205,7 @@ input[type="search"]::-webkit-search-results-decoration {
 #podcast-item {
   width: 100%;
   padding-top: 15px;
-  padding-bottom: 10px;
+  padding-bottom: 30px;
   border-top: 1px solid #181818;
   display: flex;
   background: #070707;
@@ -238,10 +238,6 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 /* Load more button */
-.load-more-with-arrow {
-  display: flex;
-}
-
 .remove-load-more-btn {
   display: none;
 }

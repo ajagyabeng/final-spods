@@ -1,3 +1,7 @@
+/*GLOBAL VARIABLES*/
+var currentItem = 4; // items already displayed when page loads
+var sliceStart = 4; // it must always correspond with currentItem
+
 // ------------------FUNCTIONS---------------------------------------------------
 function loadPodcastListData() {
   /* fetches podcasts from server and renders the numner of podcasts (from the parameters) to the homepage */
@@ -11,7 +15,7 @@ function loadPodcastListData() {
     });
 }
 
-function createPodcastItem(data) {
+function createPodcastItem(data, numPodcastsToDisplay) {
   /* creates podcast item to be added to the webpage at the podcast list section */
   let episodeData = "";
   data.forEach((episode) => {
@@ -32,6 +36,19 @@ function createPodcastItem(data) {
         </div>`;
     document.querySelector(".podcast_main_container").innerHTML = episodeData;
   });
+
+  /*Return number of loaded podcasts after sorting or searching if any*/
+  let podcasts = [
+    ...document.querySelectorAll(
+      ".content-section .podcast_main_container .podcast"
+    ),
+  ];
+  console.log(podcasts);
+  for (var i = 0; i < numPodcastsToDisplay; i++) {
+    podcasts
+      .slice(sliceStart, podcasts.length)
+      [i].setAttribute("style", "display: contents;");
+  }
 }
 
 // function appendPodcastItem(data) {
@@ -60,6 +77,16 @@ function createPodcastItem(data) {
 //   });
 // }
 
+function returnNumberOfLoadedPodcasts() {
+  let displayedPodcasts = document.querySelectorAll(".podcast[style]");
+  let numToDisplay = 0; // number of items to display when more items have been loaded on the page
+  if (displayedPodcasts.length > 0) {
+    numToDisplay = displayedPodcasts.length;
+    // console.log(numToDisplay);
+  }
+  return numToDisplay;
+}
+
 function sortPodcasts(e) {
   /* sorts podcast in descending order(newest to oldest) */
   const sortValue = e.target.getAttribute("data-sort-value");
@@ -69,7 +96,7 @@ function sortPodcasts(e) {
     })
     .then((completedata) => {
       const episode_list = completedata.podcasts;
-      createPodcastItem(episode_list);
+      createPodcastItem(episode_list, returnNumberOfLoadedPodcasts());
     });
 }
 /*---------------------END OF FUNCTIONS-------------------------------*/
@@ -79,7 +106,6 @@ loadPodcastListData();
 
 /*---------------------LOAD MORE FUNCTIONALITY-------------------------------*/
 let loadMoreBtn = document.getElementById("load-more");
-let currentItem = 4;
 let loopEndValue = 0;
 loadMoreBtn.addEventListener("click", () => {
   let podcasts = [
@@ -100,7 +126,6 @@ loadMoreBtn.addEventListener("click", () => {
     podcasts[i].setAttribute("style", "display: contents;");
   }
   currentItem += 4;
-  console.log(currentItem, podcasts.length);
 
   if (currentItem >= podcasts.length) {
     loadMoreBtn.style.display = "none";
@@ -110,13 +135,25 @@ loadMoreBtn.addEventListener("click", () => {
 
 /*-----------------------LIVE SEARCH FUNCTIONALITY-----------------------------*/
 const searchInput = document.getElementById("search-input");
-searchInput.addEventListener("keyup", searchItem);
+searchInput.addEventListener("input", searchItem);
+
+const search = document.querySelector('input[type="search"]');
+search.addEventListener("focus", () => {
+  let displayedPodcasts = document.querySelectorAll(".podcast[style]");
+  // console.log(displayedPodcasts);
+  var numToDisplay = 0;
+  if (displayedPodcasts.length > 0) {
+    numToDisplay = displayedPodcasts.length;
+    // console.log(numToDisplay);
+  }
+});
 
 async function searchItem(e) {
   /* fetches and displays the podcast that match the search input */
   podcastName = searchInput.value;
   console.log(podcastName);
-  if (podcastName) {
+  if (podcastName != "") {
+    // check if a search keyword was entered.
     const response = await fetch(`/search?podcast=${podcastName}`);
     const data = await response.json();
     createPodcastItem(data.podcasts);
@@ -132,7 +169,7 @@ async function searchItem(e) {
           })
           .then((completedata) => {
             const episode_list = completedata.podcasts;
-            createPodcastItem(episode_list);
+            createPodcastItem(episode_list, numToDisplay);
           });
       }
     }
